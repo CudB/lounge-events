@@ -13,26 +13,44 @@ class boardapp_tk(Tkinter.Tk):
   def initialize(self):
     self.grid()
 
-    image_file = Image.open("images/pool.jpg")
-    image = ImageTk.PhotoImage(image_file)
+    self.pool_image = Image.open("images/pool.jpg")
+    self.foosball_image = Image.open("images/foosball.jpg")
+    self.smash_image = Image.open("images/smash.jpg")
 
-    main = Tkinter.Label(self,image=image)
-    main.image = image
-    main.grid(column=0,row=0,rowspan=10,sticky='EW')
+    self.image = ImageTk.PhotoImage(self.smash_image)
 
-    b1 = Tkinter.Button(self,text=u"Pool")
+    self.main = Tkinter.Label(self,image=self.image)
+    self.main.image = self.image
+    self.main.grid(column=0,row=0,rowspan=10,sticky='EW')
+
+    b1 = Tkinter.Button(self,text=u"Pool", command=self.OnButton1Click)
     b1.grid(column=1,row=0,sticky='EWN')
 
-    b2 = Tkinter.Button(self,text=u"Foosball")
+    b2 = Tkinter.Button(self,text=u"Foosball", command=self.OnButton2Click)
     b2.grid(column=1,row=1,sticky='EWN')
 
-    b3 = Tkinter.Button(self,text=u"Super Smash Brothers")
+    b3 = Tkinter.Button(self,text=u"Super Smash Brothers", command=self.OnButton3Click)
     b3.grid(column=1,row=2,sticky='EWN')
 
     self.grid_columnconfigure(0,weight=1)
     self.resizable(True,False)
     self.update()
     self.geometry(self.geometry())
+
+  def OnButton1Click(self):
+    self.image = ImageTk.PhotoImage(self.pool_image)
+    self.main.configure(image = self.image)
+    self.main.image = self.image
+
+  def OnButton2Click(self):
+    self.image = ImageTk.PhotoImage(self.foosball_image)
+    self.main.configure(image = self.image)
+    self.main.image = self.image
+
+  def OnButton3Click(self):
+    self.image = ImageTk.PhotoImage(self.smash_image)
+    self.main.configure(image = self.image)
+    self.main.image = self.image
 
 if __name__ == "__main__":
   app = boardapp_tk(None)
